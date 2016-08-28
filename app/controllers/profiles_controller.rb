@@ -5,7 +5,15 @@ class ProfilesController < ApplicationController
     # GET /profiles
     # GET /profiles.json
     def index
-        @profiles = User.all
+			@per_page=5
+			if params.has_key?(:first_name)
+				@profiles = User.where('first_name like ?', '%'+params[:first_name].to_s+'%').
+						where('last_name like ?', '%'+params[:last_name].to_s+'%').
+						paginate(:page => params[:page], per_page: @per_page)
+			else
+				@profiles = User.all.paginate(:page => params[:page], per_page: @per_page)
+			end
+
     end
 
     # GET /profiles/1
@@ -34,7 +42,7 @@ class ProfilesController < ApplicationController
         if(roles.count > 0 )
             @role = roles.first
         end
-    end
+		end
 
     private
     # Use callbacks to share common setup or constraints between actions.

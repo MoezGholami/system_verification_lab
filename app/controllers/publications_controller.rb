@@ -5,7 +5,13 @@ class PublicationsController < ApplicationController
     # GET /publications
     # GET /publications.json
     def index
-        @publications = Publication.all
+        @per_page=5
+				if params.has_key?(:title)
+					@publications = Publication.where('title like ?', '%'+params[:title].to_s+'%').
+							paginate(:page => params[:page], per_page: @per_page)
+				else
+					@publications = Publication.all.paginate(:page => params[:page], per_page: @per_page)
+				end
     end
 
     # GET /publications/1

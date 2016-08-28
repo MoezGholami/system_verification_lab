@@ -29,4 +29,3 @@ UserContext.create({user_id:teacher.id , value:'http://google.com' , context_id:
 UserContext.create({user_id:student.id , value:'c++' , context_id:skill.id })
 UserContext.create({user_id:student.id , value:'c#' , context_id:skill.id })
 
-
