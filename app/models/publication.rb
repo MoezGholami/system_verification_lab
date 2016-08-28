@@ -3,13 +3,13 @@ class Publication < ActiveRecord::Base
     validates :year, presence: true
     validates :page, presence: true
     validates :volume, presence: true
-    validates :journal_id, presence: true
+    #validates :journal_id, presence: true
 
     validates :page, numericality: {only_integer: true, greater_than: 0}
     validates :volume, numericality: {only_integer: true, greater_than: 0}
     validates :year, numericality: {only_integer: true, less_than_or_equal_to: Date.today.year.to_i}
 
-    belongs_to :journal
+    #belongs_to :journal
     has_many :user_publications
     has_many :users, through: :user_publications
 

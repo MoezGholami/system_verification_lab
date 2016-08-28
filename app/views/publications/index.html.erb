@@ -14,7 +14,7 @@
             <th>Year</th>
             <th>Page</th>
             <th>Volume</th>
-            <th>Journal</th>
+            <!-- <th>Journal</th> -->
             <th></th>
         <th></th>
         <th></th>
@@ -27,7 +27,7 @@
             <td><%= publication.year %></td>
             <td><%= publication.page %></td>
             <td><%= publication.volume %></td>
-            <td><%= publication.journal.name %></td>
+            <!-- <td><%#= publication.journal.name %></td> -->
             <td><%= link_to 'Show', publication %></td>
         <td><%= link_to 'Edit', edit_publication_path(publication) %></td>
         <td><%= link_to 'Destroy', publication, method: :delete, data: { confirm: 'Are you sure?' } %></td>

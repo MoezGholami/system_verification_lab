@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822223237) do
+ActiveRecord::Schema.define(version: 20160827105348) do
 
   create_table "contexts", force: :cascade do |t|
     t.string   "name"
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(version: 20160822223237) do
 
   add_index "publications", ["journal_id"], name: "index_publications_on_journal_id"
 
+  create_table "role_contexts", force: :cascade do |t|
+    t.integer "role_id"
+    t.integer "context_id"
+  end
+
+  add_index "role_contexts", ["role_id", "context_id"], name: "index_role_contexts_on_role_id_and_context_id"
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "priority"
@@ -95,15 +102,13 @@ ActiveRecord::Schema.define(version: 20160822223237) do
 
   add_index "sponsors", ["name"], name: "index_sponsors_on_name", unique: true
 
-  create_table "user_contexts", id: false, force: :cascade do |t|
+  create_table "user_contexts", force: :cascade do |t|
     t.string   "value"
     t.integer  "context_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  add_index "user_contexts", ["user_id", "context_id"], name: "index_user_contexts_on_user_id_and_context_id"
 
   create_table "user_publications", force: :cascade do |t|
     t.integer  "user_id"
@@ -135,6 +140,8 @@ ActiveRecord::Schema.define(version: 20160822223237) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.text     "bio"
+    t.string   "url"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
